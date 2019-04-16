@@ -1,12 +1,25 @@
-FROM ubuntu:18.04
+FROM continuumio/miniconda3
 
-ENV DOOCSARCH=Ubuntu-18.04-x86_64
+SHELL ["/bin/bash", "-c"]
 
-RUN apt-get update && apt-get install -y build-essential libldap2-dev git meson && \
-    git clone http://doocs-git.desy.de/cgit/doocs/$DOOCSARCH.git doocs/$DOOCSARCH && \
-    git clone http://doocs-git.desy.de/cgit/doocs/library/common/gul.git doocs/library/common/gul && \
-    git clone http://doocs-git.desy.de/cgit/doocs/library/common/clientlib.git doocs/library/common/clientlib && \
-    cd doocs/library/common/gul && make localinstall && \ 
-    cd /doocs/library/common/clientlib && sed -i '/\t$(OBJDIR)\/libTTFapi./d' Makefile && make localinstall
+ARG DEPENDENCIES_CONDA="numpy conda-build"
+ARG DEPENDENCIES_PIP="teamcity-messages"
+
+RUN conda update -n base -c defaults conda && \
+    conda create -n python35 python=3.5 $DEPENDENCIES_CONDA && \
+    source activate python35 && pip install $DEPENDENCIES_PIP && \
+    conda deactivate && \
+    conda create -n python36 python=3.6 $DEPENDENCIES_CONDA && \
+    source activate python36 && pip install $DEPENDENCIES_PIP && \
+    conda deactivate && \
+    conda create -n python37 python=3.7 $DEPENDENCIES_CONDA && \
+    source activate python37 && pip install $DEPENDENCIES_PIP && \
+    conda deactivate && \
+    conda config --add channels http://www.desy.de/~cbehrens/doocsconda/
+
+COPY src src
+COPY test test
+COPY setup.py .
+COPY README.md .
 
 ENTRYPOINT ["/bin/bash", "-c"]
