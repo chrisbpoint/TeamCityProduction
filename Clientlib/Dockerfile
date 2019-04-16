@@ -9,4 +9,3 @@ RUN apt-get update && apt-get install -y build-essential libldap2-dev git meson 
     cd doocs/library/common/gul && make localinstall && \ 
     cd /doocs/library/common/clientlib && sed -i '/\t$(OBJDIR)\/libTTFapi./d' Makefile && make localinstall
 
-ENTRYPOINT ["/bin/bash", "-c"]
