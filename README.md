@@ -3,3 +3,4 @@ TeamCity production repository containing the build configurations and Dockerfil
 * BeamtimeDaqAccess
 * Pydoocs
   * Clientlib
+  * Pydoocslib
