@@ -1,0 +1,3 @@
+TeamCity*
+.BuildServer
+!TeamCity_Backup_*.zip
