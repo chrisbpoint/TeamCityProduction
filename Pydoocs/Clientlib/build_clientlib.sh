@@ -7,4 +7,4 @@ git -C doocs/library/common/gul pull || git clone http://doocs-git.desy.de/cgit/
 git -C doocs/library/common/clientlib pull || git clone http://doocs-git.desy.de/cgit/doocs/library/common/clientlib.git doocs/library/common/clientlib
 
 cd doocs/library/common/gul && make clean && make localinstall && cd - 
-cd doocs/library/common/clientlib && && pwd && ls && ls ../../../ && sed -i "" -e '/  $(OBJDIR)\/libTTFapi./d' Makefile && make clean && make localinstall
+cd doocs/library/common/clientlib && pwd && ls && ls ../../../ && sed -i "" -e '/  $(OBJDIR)\/libTTFapi./d' Makefile && make clean && make localinstall
