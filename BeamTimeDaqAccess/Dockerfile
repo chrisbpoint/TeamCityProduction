@@ -18,7 +18,7 @@ RUN conda update -n base -c defaults conda && \
     conda create -n python27 python=2.7 $DEPENDENCIES_CONDA && \
     source activate python27 && pip install $DEPENDENCIES_PIP && \
     conda deactivate && \
-    conda config --add channels http://www.desy.de/~wwwuser/flashconda/
+    conda config --add channels http://doocspkgs.desy.de/pub/flashconda/
 
 COPY src src
 COPY tests tests
